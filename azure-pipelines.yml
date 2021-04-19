@@ -7,11 +7,11 @@ pool:
   vmImage: ubuntu-20.04
 
 steps:
-- task CmdLine@2
+- task: CmdLine@2
   displayName: get dockerfile
   inputs:
     script: 'wget https://raw.githubusercontent.com/rdkit/rdkit/master/Code/MinimalLib/docker/Dockerfile'
-- task Docker@2
+- task: Docker@2
   displayName: build js wrappers
   inputs:
     command: build

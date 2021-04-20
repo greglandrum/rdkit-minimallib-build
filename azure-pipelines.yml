@@ -21,7 +21,7 @@ jobs:
       command: build
 - job: linux-cffi
   timeoutInMinutes: 60
-    pool:
+  pool:
     vmImage: ubuntu-20.04
   variables:
     number_of_cores: nproc

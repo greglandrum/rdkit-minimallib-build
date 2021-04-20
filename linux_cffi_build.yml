@@ -25,7 +25,7 @@ steps:
   displayName: Configure build (Run CMake)
   - bash: |
     cd rdkit/build
-    make -j $( $(number_of_cores) ) cffi_test
+    make -j 2 cffi_test
   displayName: Build
 - bash: |
     cd rdkit

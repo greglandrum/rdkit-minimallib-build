@@ -23,7 +23,5 @@ jobs:
   timeoutInMinutes: 60
   pool:
     vmImage: ubuntu-20.04
-  variables:
-    number_of_cores: nproc
   steps:
   - template: linux_cffi_build.yml

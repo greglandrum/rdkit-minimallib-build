@@ -18,8 +18,6 @@ steps:
     -DRDK_BUILD_THREADSAFE_SSS=ON \
     -DRDK_TEST_MULTITHREADED=ON \
     -DRDK_BUILD_CFFI_LIB=ON \
-    -DBoost_NO_SYSTEM_PATHS=ON \
-    -DBoost_NO_BOOST_CMAKE=TRUE \
     -DCMAKE_INCLUDE_PATH="${CONDA_PREFIX}/include" \
     -DCMAKE_LIBRARY_PATH="${CONDA_PREFIX}/lib"
   displayName: Configure build (Run CMake)

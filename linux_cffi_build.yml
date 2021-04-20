@@ -23,7 +23,7 @@ steps:
     -DCMAKE_INCLUDE_PATH="${CONDA_PREFIX}/include" \
     -DCMAKE_LIBRARY_PATH="${CONDA_PREFIX}/lib"
   displayName: Configure build (Run CMake)
-  - bash: |
+- bash: |
     cd rdkit/build
     make -j 2 cffi_test
   displayName: Build

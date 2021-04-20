@@ -1,6 +1,6 @@
 steps:
 - bash: |
-    sudo apt-get install git g++ gcc wget make cmake libbost-all-dev
+    sudo apt-get install git g++ gcc wget make cmake libboost-all-dev
   displayName: Setup build environment
 - bash: |
     git clone https://github.com/rdkit/rdkit.git

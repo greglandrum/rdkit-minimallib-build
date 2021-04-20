@@ -1,0 +1,37 @@
+steps:
+- bash: |
+    sudo apt-get install git g++ gcc wget make cmake libbost-all-dev
+  displayName: Setup build environment
+- bash: |
+    git clone https://github.com/rdkit/rdkit.git
+  displayName: Clone main RDKit repo
+- bash: |
+    cd rdkit && mkdir build && cd build && \
+    cmake .. \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DRDK_BUILD_CPP_TESTS=OFF \
+    -DRDK_BUILD_PYTHON_WRAPPERS=OFF \
+    -DRDK_BUILD_COORDGEN_SUPPORT=ON \
+    -DRDK_BUILD_MAEPARSER_SUPPORT=ON \
+    -DRDK_OPTIMIZE_POPCNT=ON \
+    -DRDK_BUILD_INCHI_SUPPORT=ON \
+    -DRDK_BUILD_THREADSAFE_SSS=ON \
+    -DRDK_TEST_MULTITHREADED=ON \
+    -DRDK_BUILD_CFFI_LIB=ON \
+    -DBoost_NO_SYSTEM_PATHS=ON \
+    -DBoost_NO_BOOST_CMAKE=TRUE \
+    -DCMAKE_INCLUDE_PATH="${CONDA_PREFIX}/include" \
+    -DCMAKE_LIBRARY_PATH="${CONDA_PREFIX}/lib"
+  displayName: Configure build (Run CMake)
+  - bash: |
+    cd rdkit/build
+    make -j $( $(number_of_cores) ) cffi_test
+  displayName: Build
+- bash: |
+    cd rdkit
+    export RDBASE=`pwd`
+    export LD_LIBRARY_PATH=${RDBASE}/lib:${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH}
+    echo "LD_LIBRARY_PATH: " $LD_LIBRARY_PATH
+    cd build
+    ./Code/MinimalLib/cffi_test
+  displayName: Run tests

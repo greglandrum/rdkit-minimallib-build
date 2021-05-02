@@ -43,5 +43,7 @@ steps:
     cp $FNAME $(Build.ArtifactStagingDirectory)/linux-64/$FNAME.$BUILD
     ls -l $(Build.ArtifactStagingDirectory)/linux-64
   displayName: Create build artifacts
-- publish: $(Build.ArtifactStagingDirectory)
-  artifact: rdkitcffi_linux
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: rdkitcffi_linux

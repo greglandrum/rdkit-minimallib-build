@@ -3,26 +3,26 @@ steps:
     echo "Removing homebrew from Azure to avoid conflicts."
     curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall > ~/uninstall_homebrew
     chmod +x ~/uninstall_homebrew
-    ~/uninstall_homebrew -fq
+    ~/uninstall_homebrew -f -q
     rm ~/uninstall_homebrew
   displayName: Remove homebrew
 - bash: |
     source ${CONDA}/etc/profile.d/conda.sh
     sudo chown -R ${USER} ${CONDA}
     conda config --set always_yes yes --set changeps1 no
-    conda create --name rdkit_build cmake \
-        boost-cpp=$(boost_version) boost=$(boost_version) \
-        libboost=$(boost_version) \
-        cairo eigen 
+    conda create --name rdkit_build 
     conda activate rdkit_build
+    conda install -c conda-forge cmake \
+        boost-cpp=$(boost_version) boost=$(boost_version) \
+        cairo eigen 
   displayName: Setup build environment
 - bash: |
     git clone https://github.com/rdkit/rdkit.git
   displayName: Clone main RDKit repo
 - bash: |
+    source ${CONDA}/etc/profile.d/conda.sh
     cd rdkit && mkdir build && cd build && \
     conda activate rdkit_build
-    export BOOST_ROOT=$CONDA_PREFIX
     cmake .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DRDK_BUILD_CPP_TESTS=OFF \

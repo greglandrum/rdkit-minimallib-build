@@ -35,7 +35,8 @@ steps:
     -DRDK_TEST_MULTITHREADED=ON \
     -DRDK_BUILD_CFFI_LIB=ON \
     -DCMAKE_INCLUDE_PATH="${CONDA_PREFIX}/include" \
-    -DCMAKE_LIBRARY_PATH="${CONDA_PREFIX}/lib"
+    -DCMAKE_LIBRARY_PATH="${CONDA_PREFIX}/lib" \
+    -DBOOST_ROOT="${CONDA_PREFIX}"
   displayName: Configure build (Run CMake)
 - bash: |
     cd rdkit/build

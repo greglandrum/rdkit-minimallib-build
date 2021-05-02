@@ -33,3 +33,14 @@ steps:
     cd build
     ./Code/MinimalLib/cffi_test
   displayName: Run tests
+- bash: |
+    mkdir -p $(Build.ArtifactStagingDirectory)/linux-64
+    echo "-----------------"
+    ls -l rdkit/build/lib/librdkitcffi.so.1.*
+    cd rdkit/build/lib
+    FNAME = `ls librdkitcffi.so.1.*`
+    cp $FNAME $(Build.ArtifactStagingDirectory)/linux-64/$FNAME.$(Build.BuildNumber)
+    ls -l $(Build.ArtifactStagingDirectory)/linux-64
+  displayName: Create build artifacts
+- publish: $(Build.ArtifactStagingDirectory)
+  artifact: rdkitcffi_linux

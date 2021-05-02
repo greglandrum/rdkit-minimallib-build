@@ -25,3 +25,9 @@ jobs:
     vmImage: ubuntu-20.04
   steps:
   - template: linux_cffi_build.yml
+- job: mac_cffi
+  timeoutInMinutes: 60
+  pool:
+    vmImage: macos-10.15
+  steps:
+  - template: mac_cffi_build.yml

@@ -45,3 +45,11 @@ steps:
   displayName: Create build artifacts
 - publish: $(Build.ArtifactStagingDirectory)
   artifact: rdkitcffi_linux
+- task: UniversalPackages@0
+  displayName: Universal Publish
+  inputs:
+    command: publish
+    publishDirectory: '$(Build.ArtifactStagingDirectory)'
+    vstsFeedPublish: 'RDKit/rdkit_cffi'
+    vstsFeedPackagePublish: 'rdkitcffi_linux'
+    packagePublishDescription: 'linux lib'

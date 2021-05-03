@@ -12,8 +12,8 @@ steps:
     conda config --set always_yes yes --set changeps1 no
     conda create --name rdkit_build 
     conda activate rdkit_build
-    conda install -c conda-forge cmake \
-        boost-cpp=$(boost_version) boost=$(boost_version) \
+    conda install cmake \
+        boost-cpp=$(boost_version)  \
         cairo eigen 
   displayName: Setup build environment
 - bash: |
@@ -36,6 +36,8 @@ steps:
     -DRDK_BUILD_CFFI_LIB=ON \
     -DCMAKE_INCLUDE_PATH="${CONDA_PREFIX}/include" \
     -DCMAKE_LIBRARY_PATH="${CONDA_PREFIX}/lib" \
+    -DCMAKE_CXX_FLAGS="-target x86_64-app-macos10.12" -DCMAKE_C_FLAGS="-target x86_64-app-macos10.12" \
+    -DBoost_USE_STATIC_LIBS=ON \
     -DBOOST_ROOT="${CONDA_PREFIX}"
   displayName: Configure build (Run CMake)
 - bash: |

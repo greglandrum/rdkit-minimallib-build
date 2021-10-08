@@ -3,7 +3,7 @@ steps:
     sudo apt-get install git g++ gcc wget make cmake libboost-all-dev
   displayName: Setup build environment
 - bash: |
-    git clone https://github.com/rdkit/rdkit.git
+    git clone https://github.com/rdkit/rdkit.git --branch Release_2021_09 --single-branch rdkit --depth=1
   displayName: Clone main RDKit repo
 - bash: |
     cd rdkit && mkdir build && cd build && \
